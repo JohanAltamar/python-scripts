@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+#: import Window kivy.core.window.Window
+
+<FlatButton@ButtonBehavior+Label>:#Fondo Boton Transparente
+    font_size:16
+<SigninWindow>: #Ventana de registro
+    id: main_win
+    orientation: "vertical"
+    spacing: 10
+    space_x: self.size[0]/3
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:#Franja superior
+        size_hint_y: None
+        height: 50
+        canvas.before:
+            Color:
+                rgba: (.59, .20, .63, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: "             Control de Acceso"
+            bold: True
+            size_hint_x: 0.9
+        FlatButton:
+            text: "x"
+            size_hint_x: 0.1
+            on_release: Window.close()
+    BoxLayout:#Franja inferior
+        orientation: "vertical"
+        padding: main_win.space_x, 10
+        spacing: 20
+        BoxLayout:#Contenedor datos de ingreso
+            orientation: "vertical"
+            spacing: 10
+            size_hint_y: None
+            height: 100
+            Label:#Info estatus de ingreso
+                id: info
+                text: ''
+                markup:True
+                size_hint_y:None
+                height: 20
+            TextInput:#Usuario
+                id: username_field
+                hint_text: "Usuario"
+                multiline: False
+                focus: True
+                on_text_validate: pwd_field.focus: True
+            TextInput:#Contraseña
+                id: pwd_field
+                hint_text: "Password"
+                multiline: False
+                password: True
+                on_text_validate: root.validate_user()
+        Label:#Espacio
+            id: sp
+            size_hint_y: None
+            height: 40
+        Button:#Boton Ingresar
+            text: "Ingresar"
+            size_hint_y: None
+            height: 40
+            background_color: (.59, .20, .63, 1)
+            background_normal: ''
+            on_release: root.validate_user()
+        Label: #Espacio
+            id: sp2

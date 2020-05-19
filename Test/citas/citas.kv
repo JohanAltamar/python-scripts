@@ -1,0 +1,209 @@
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 14
+    bold: True
+
+<citasWindow>:
+    id: main_win
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: (1,1,1, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:#Encabezado
+        id: header
+        size_hint_y: None
+        height: 40
+        canvas.before:
+            Color:
+                rgba: (.5, .0, .5, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: 'Programacion de Medicamentos'
+            size_hint_x: .9
+            bold: True
+            color: (1,1,1,1)
+        FlatButton:
+            id: loggedin_user
+            size_hint_x: .1
+            text: 'usuario'
+            color: (1,1,1,1)
+            underline: True
+            on_release: root.logout()
+    BoxLayout:#Info Pax
+        orientation:'vertical'
+        spacing: 10
+        size_hint_y: None
+        height: 180
+        BoxLayout:#Curren_pax
+            id: current
+            size_hint_y: None
+            height: 50
+            canvas.before:
+                Color:
+                    rgba: (1,1,1, 1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Button:
+                text: 'Paciente:'
+                bold:True
+                background_normal: ''
+                background_color: (.6, .2, .6, 1)
+                size_hint_x: .3
+            Button:
+                #id: cur_product
+                id: cur_pax_name
+                bold:True
+                text: ''
+                background_normal: ''
+                background_color: (.6, .30, .6, 1)
+                size_hint_x: .4
+            Button:
+                #id: cur_price
+                id: cur_pax_age
+                bold:True
+                text: ''
+                background_normal: ''
+                background_color: (.6, .45, .6, 1)
+                size_hint_x: .15
+            Button:
+                #id: cur_price
+                id: cur_pax_weight
+                text: ''
+                background_normal: ''
+                background_color: (.6, .45, .6, 1)
+                size_hint_x: .15
+        BoxLayout:#Labels
+            BoxLayout:#sp
+                size_hint_x:None
+                width:10
+            BoxLayout:#Labels
+                id: product_labels
+                size_hint_y: None
+                height: 40
+                padding:(10,0)
+                canvas.before:
+                    Color:
+                        rgba: (.6,.0,.6, 1)
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                FlatButton:
+                    text: 'Doc. Identidad'
+                    size_hint_x: .3
+                FlatButton:
+                    text: 'Nombre'
+                    size_hint_x: .2
+                FlatButton:
+                    text: 'Apellido'
+                    size_hint_x: .2
+                FlatButton:
+                    text: 'Peso'
+                    size_hint_x: .1
+                FlatButton:
+                    text: 'Fecha Nac.'
+                    size_hint_x: .2
+            BoxLayout:#sp
+                size_hint_x:None
+                width:10
+        BoxLayout:#Inputs
+            id: pax_inputs
+            size_hint_y: None
+            height: 30
+            spacing: 10
+            padding:(10,0)
+            TextInput:
+                id: pax_id
+                size_hint_x: .3
+                multiline: False
+                on_text_validate: root.find_pax()
+            TextInput:
+                id: pax_name
+                size_hint_x: .2
+                multiline: False
+            TextInput:
+                id: pax_last_name
+                size_hint_x: .2
+                multiline: False
+            TextInput:
+                id: pax_weight
+                size_hint_x: .1
+                multiline: False
+            TextInput:
+                id: pax_bday
+                size_hint_x: .2
+                multiline: False
+        BoxLayout:#Botones
+            spacing:10
+            padding:(10,0)
+            size_hint_y:None
+            height:30
+            FlatButton:
+                text:''
+                size_hint_x:0.49
+            Button:
+                text: 'Buscar'
+                size_hint_x:0.17
+                on_release: root.find_pax()
+            Button:
+                text:'Modificar'
+                size_hint_x:0.17
+                on_release:root.update_pax()
+            Button:
+                text:'Programar'
+                size_hint_x:0.17
+                on_release:root.schedule_medicines()
+    BoxLayout:#Formula
+        padding: 10
+        spacing: 10
+        BoxLayout:#Pedido actual
+            size_hint_x: .75
+            spacing: 10
+            id: add_to_cart
+            orientation: 'vertical'
+            BoxLayout:
+                id: products
+            BoxLayout:
+                id: medecine_boxlayout
+                spacing: 10
+                size_hint_y: None
+                height: 30
+            BoxLayout:#Botones Formula
+                id:programar_medicinas
+                size_hint_y:None
+                height: 30
+                spacing: 10
+        # BoxLayout:
+        #     id: preview
+        #     orientation: 'vertical'
+        #     size_hint_x: .25
+        #     TextInput:
+        #         id: receipt_preview
+        #         readonly: True
+        #         text: 'The Collector\n123 Main St\nKnowhere, Space\n\nTel: (555)-123-456\nReceipt No: \nDate: \n\n'
+    BoxLayout:#Finalizar Cita
+        size_hint_y:None
+        height: 40
+        padding:(0,0,0,10)
+        FlatButton:
+        Button:
+            text:'FINALIZAR CITA'
+            bold: True
+            on_release: root.end_visit()
+        FlatButton:
+    BoxLayout:#Pie de pagina
+        id: footer
+        size_hint_y: None
+        height: 30
+        canvas.before:
+            Color:
+                rgba: (.6,.0,.6, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: ''
